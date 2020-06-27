@@ -4,7 +4,7 @@
 
 @section('content')
 
-<h1>Contactanos</h1>
+<h1>Contáctanos</h1>
 
 
 

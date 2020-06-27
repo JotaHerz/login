@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\TokenActivator;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+
 class RegisterController extends Controller
 {
     /*
@@ -31,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = "/";
 
     /**
      * Create a new controller instance.
@@ -56,8 +54,6 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-
-
     }
 
     /**
@@ -68,24 +64,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user= User::create([
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-
-        TokenActivator::create([
-            'user_id' => $user->id,
-           'token' => str::random(60)
-
-        ]);
-         return $user;
     }
-
-    protected function registered(Request $request, $user)
-    {
-        $this->guard()->logout();
-        return redirect('login')->withInfo('Ingresa a tu correo y termina el proceso de activación');
-    }
-
 }
