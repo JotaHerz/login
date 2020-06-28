@@ -35,7 +35,32 @@
 
 
 
-       @guest
+
+                  @auth
+
+                    @if(auth::user()->email_verified_at)
+
+                    <li class="nav-item" >
+                        <a class="nav-link {{ setActive('admin.users') }}"
+                        href="{{route('admin.users')}}">Usuarios</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link"
+                        href="#"
+                        onclick="event.preventDefault();
+                     document.getElementById('logout-form').submit();"
+                     >Cerarr sesión</a></li>
+
+
+                    <li class="nav-item" >
+                        <a class= "nav-link" href="#">{{ auth()->user()->name }}</a></li>
+
+
+                    @endif
+
+                    @else
+
             <li class="nav-item" >
                 <a class="nav-link {{ setActive('register') }}"
                 href="{{route('register')}}">Registro</a>
@@ -44,40 +69,10 @@
             <li class="nav-item">
                 <a class="nav-link {{ setActive('login') }}"
                 href="{{route('login')}}">Login</a></li>
-       @else
 
-        <li class="nav-item">
-            <a class="nav-link"
-            href="#"
-            onclick="event.preventDefault();
-         document.getElementById('logout-form').submit();"
-         >Cerarr sesión</a></li>
+                    @endauth
 
-
-         <li class="nav-item" >
-            <a class="nav-link {{ setActive('admin.users') }}"
-            href="{{route('admin.users')}}">Usuarios</a>
-        </li>
-
-
-
-                @auth
-                <li class="nav-item" >
-                    <a class= "nav-link" href="#">{{ auth()->user()->name }}</a></li>
-
-                @endauth
-
-
-
-
-        @endguest </ul>
-
-
-
-
-
-
-
+            </ul>
 
 
     </div>

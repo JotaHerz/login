@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Product;
 class ProductController extends Controller
 {
     /**
@@ -13,12 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-       $products=[
-           ['title'=>'Productos #1'],
-           ['title'=>'Productos #2'],
-           ['title'=>'Productos #3'],
-           ['title'=>'Productos #4'],
-       ];
+       $products=Product::get();
        return view('products', compact('products'));
 
 

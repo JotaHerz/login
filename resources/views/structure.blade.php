@@ -16,16 +16,25 @@
 
 </head>
 <body>
-    @include('partials.nav')
-    @include('partials.session-status')
+    <div class="d-flex flex-column h-screen justify-content-between">
+        <header>
+        @include('partials.nav')
+        @include('partials.session-status')
+        @if(session()->has('info'))
+        <div class="container">
+         <div class="alert alert-info">{{ session('info') }}</div>
+        </div>
+        @endif
+    </header>
 
-    @if(session()->has('info'))
-    <div class="container">
-     <div class="alert alert-info">{{ session('info') }}</div>
-    </div>
-    @endif
+    <main>
+        @yield('content')
+    </main>
+    <footer class="bg-white text-center text-black-50 py shadow">
+        {{ config('app.name') }} | copyright @ {{ date('Y') }}
+    </footer>
+</div>
 
-    @yield('content')
 
 </body>
 </html>
