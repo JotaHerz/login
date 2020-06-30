@@ -5,6 +5,14 @@
 
 @section('content')
 
+@if(session('status'))
+<div class="alert alert-primary" role="success">
+    {{session('status')}}
+  </div>
+
+
+@endif
+
 <div class="container">
     <div class="row">
 

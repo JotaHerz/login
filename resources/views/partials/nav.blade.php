@@ -32,30 +32,23 @@
             <a class="nav-link {{ setActive('contact') }}"
             href="/Contactanos">Contáctanos</a>
         </li>
-
-
-
-
                   @auth
 
-                    @if(auth::user()->email_verified_at)
+                     @if(auth::user()->email_verified_at)
 
-                    <li class="nav-item" >
-                        <a class="nav-link {{ setActive('admin.users') }}"
-                        href="{{route('admin.users')}}">Usuarios</a>
-                    </li>
+                        <li class="nav-item" >
+                            <a class="nav-link {{ setActive('admin.users') }}"
+                            href="{{route('admin.users')}}">Usuarios</a>
+                        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link"
-                        href="#"
-                        onclick="event.preventDefault();
-                     document.getElementById('logout-form').submit();"
-                     >Cerarr sesión</a></li>
-
-
-                    <li class="nav-item" >
-                        <a class= "nav-link" href="#">{{ auth()->user()->name }}</a></li>
-
+                        <li class="nav-item">
+                            <a class="nav-link"
+                            href="#"
+                            onclick="event.preventDefault();
+                         document.getElementById('logout-form').submit();"
+                         >Cerarr sesión</a></li>
+                         <li class="nav-item" >
+                            <a class= "nav-link" href="#">{{ auth()->user()->name }}</a></li>
 
                     @endif
 

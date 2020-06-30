@@ -18,13 +18,7 @@
 <body>
     <div class="d-flex flex-column h-screen justify-content-between">
         <header>
-        @include('partials.nav')
-        @include('partials.session-status')
-        @if(session()->has('info'))
-        <div class="container">
-         <div class="alert alert-info">{{ session('info') }}</div>
-        </div>
-        @endif
+            @include('partials.nav')
     </header>
 
     <main>

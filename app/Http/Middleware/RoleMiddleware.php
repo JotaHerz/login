@@ -18,7 +18,7 @@ class RoleMiddleware
         if ($request->user()->Admin()) {
             return $next($request);
         }
-        return redirect('/')->with('message', 'No tienes permisos para acceder a esa ruta');
+        return redirect('/')->with( 'status','No tienes permisos para realizar esta acción!!');
     }
     }
 
