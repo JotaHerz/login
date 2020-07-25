@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use App\Product;
+use Illuminate\Http\Request;
+use App\Http\Requests\saveproductsRequest;
+use Illuminate\Support\Facades\Srorage;
+use Illuminate\Support\Facades\Storage;
+
 class ProductController extends Controller
 {
     /**
@@ -13,10 +18,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-       $products=Product::get();
-       return view('products', compact('products'));
 
-
+       return view('products.index', ['products'=>Product::latest()->paginate(5)]);
 
     }
 
@@ -29,7 +32,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create', [
+            'products'=> new Product
+        ]);
     }
 
     /**
@@ -38,9 +43,16 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(saveProductsRequest $request)
     {
-        //
+       $product = new Product($request->validated());
+
+        $product->image= $request->file('image')->store('images');
+
+        $product->save();
+        //return $request->file('image')->store('images');;
+        //Product::create($request->validate());
+        return redirect()->route('products.index');
     }
 
     /**
@@ -49,9 +61,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        //
+      return view('products.show', [
+          'products'=>$product
+          ]);
     }
 
     /**
@@ -60,9 +74,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        return view('products.edit', [
+            'products'=>$product
+            ]);
     }
 
     /**
@@ -72,9 +88,19 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Product $product, saveProductsRequest $request)
     {
-        //
+        if($request->hasFile('image')){
+            Storage::delete($product->image);
+            $product->fill($request->validated());
+            $product->image=$request->file('image')->store('images');
+            $product->save();
+        } else{
+            $product->update(array_filter($request->validated()));
+
+        }
+
+        return redirect()->route('products.show',$product);
     }
 
     /**
@@ -83,8 +109,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        Storage::delete($product->image);
+        $product->delete();
+        return redirect()->route('products.index');
     }
 }

@@ -23,8 +23,8 @@
 
 
         <li class="nav-item">
-            <a class="nav-link {{ setActive('products') }}"
-             href="{{ route('products') }}">Productos</a>
+            <a class="nav-link {{ setActive('products.*') }}"
+             href="{{ route('products.index') }}">Productos</a>
          </li>
 
 
