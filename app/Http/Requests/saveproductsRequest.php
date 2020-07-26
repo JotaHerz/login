@@ -28,6 +28,7 @@ class saveproductsRequest extends FormRequest
             'url'=>'required',
             'description'=>'required',
             'cost'=>'required',
+            'category_id'=> ['required', 'exists:categories,id'],
             'image'=>[
                 $this->route('product')? 'nullable':'required'] //jpg, png,bmp, git, svg o webp
         ];

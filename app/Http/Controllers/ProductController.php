@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\category;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\saveproductsRequest;
@@ -33,7 +33,8 @@ class ProductController extends Controller
     public function create()
     {
         return view('products.create', [
-            'products'=> new Product
+            'products'=> new Product,
+            'categories'=>category::pluck('name', 'id')
         ]);
     }
 
@@ -50,8 +51,7 @@ class ProductController extends Controller
         $product->image= $request->file('image')->store('images');
 
         $product->save();
-        //return $request->file('image')->store('images');;
-        //Product::create($request->validate());
+
         return redirect()->route('products.index');
     }
 
@@ -77,7 +77,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         return view('products.edit', [
-            'products'=>$product
+            'products'=>$product,
+            'categories'=>category::pluck('name', 'id')
             ]);
     }
 
