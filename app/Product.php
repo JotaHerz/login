@@ -19,5 +19,14 @@ class Product extends Model
        return $this->belongsTo(category::class);
 
     }
+    // Scope
+    public function scopeTitle($query,$title)
+    {
+        if($title){
+            return $query->where('title', 'LIke', "%title%");
+
+        }
+
+    }
 
 }

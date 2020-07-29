@@ -1,5 +1,6 @@
 <?php
 
+use App\category;
 use App\Http\Controllers\MesscontactController;
 use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 use App\Http\Middleware\RoleMiddleware;
@@ -12,6 +13,7 @@ Route::delete('/Productos/{product}','ProductController@destroy')->name('product
 Route::patch('/Productos/{product}','ProductController@update')->name('products.update');
 Route::post('/Productos', 'ProductController@store')->name('products.store');
 Route::get('/Productos/{product}','ProductController@show')->name('products.show');
+Route::get('categorias/{category}', 'CategoryController@show')->name('categories.show');
 
 
 

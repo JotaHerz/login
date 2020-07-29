@@ -1,6 +1,6 @@
 <div class="custom-file">
     <input name="image" type="file" class="custom-file-input" id="customFile">
-    <label class="custom-file-label" for="customFile">Choose file</label>
+    <label class="custom-file-label"  for="customFile">Choose file</label>
 </div>
 
 <div class="form-group">
@@ -13,7 +13,7 @@
        <option value="">Seleccione</option>
        @foreach($categories as $id => $name)
           <option value="{{ $id }}"
-          @if($id==$products->category_id) selected @endif
+          @if($id== old('category_id',$products->category_id)) selected @endif
           >{{ $name }}</option>
        @endforeach
     </select>

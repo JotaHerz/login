@@ -16,10 +16,21 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $title= $request->get('title');
 
-       return view('products.index', ['products'=>Product::latest()->paginate(5)]);
+        $products=Product::orderBy('id')
+        ->title($title)
+        ->paginate(6);
+
+        return view('products.index', ['products'=>Product::with('category')->latest()->paginate(6)]);
+
+
+
+
+
+
 
     }
 

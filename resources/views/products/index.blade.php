@@ -7,7 +7,15 @@
 
 <div class="container">
     <div class="d-flex justify-content-between align-items-center">
-        <h1 class="display-8 mb-0">Productos</h1>
+        @isset($category)
+        <div>
+            <h1 class="display-8 mb-0">{{ $category->name }}</h1>
+            <a href="{{ route('products.index') }}">Regresar a Productos</a>
+        </div>
+
+        @else
+            <h1 class="display-8 mb-0">Productos</h1>
+        @endisset
              <a class="btn btn-primary"
                 href="{{ route('products.create') }}"
                 >Crear producto</a>
@@ -21,7 +29,7 @@
 
         <div class="card border-0 shadow-sm mt-4 mx-auto" style="width: 18rem">
             @if($Item->image)
-                    <img class="card-img-top"
+                    <img class="card-img-top" style="height: 150px; object-fit:cover"
                     src="/storage/{{ $Item->image }}"
                     alt="{{$Item->title}}">
                 @endif
@@ -29,7 +37,17 @@
                     <h5 class="card-title"> <a href="{{route('products.show', $Item)}}">{{ $Item->title}}</a>
                     </h5>
                     <p class="card-text text-truncate">{{ $Item->cost }}</p>
-                    <p class="card-text text-truncate">{{ $Item->description }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="card-text text-truncate">{{ $Item->description }}</p>
+                        @if($Item->category_id)
+                             <a href="{{route('categories.show',$Item->category)}}"
+                                 class="badge bange-secondary"
+                                 >{{ $Item->category->name }}</a>
+                        @endif
+
+
+                    </div>
+
 
 
                 </div>
@@ -63,8 +81,8 @@
 
     </div>
     @endforelse
-    {{ $products->links()}}
+
 
 </div>
-
+{{ $products->links() }}
 @endsection
