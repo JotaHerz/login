@@ -19,17 +19,8 @@ class ProductController extends Controller
     public function index(Request $request)
     {
 
-        $title=$request->GET('search');
-
-       $products=Product::title($title)
-        ->with('category')
-        ->latest()
-        ->paginate(6);
-
-     return view('products.index', compact('products'));
-
-
-        return view('products.index', ['products'=>Product::title($title)->with('category')->latest()->paginate(6)]);
+        $title=$request->get('search');
+         return view('products.index', ['products'=>Product::title($title)->with('category')->latest()->paginate(6)]);
     }
 
 
