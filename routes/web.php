@@ -1,17 +1,19 @@
 <?php
 
+use App\category;
 use App\Http\Controllers\MesscontactController;
 use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 use App\Http\Middleware\RoleMiddleware;
 
 Route::view('/', 'Inicio')->name('Inicio');
-Route::get('/Productos', 'ProductController@index')->name('products.index');
+Route::GET('/Productos', 'ProductController@index')->name('products.index');
 Route::get('/Productos/crear','ProductController@create')->name('products.create');
 Route::get('/Productos/{product}/editar','ProductController@edit')->name('products.edit');
 Route::delete('/Productos/{product}','ProductController@destroy')->name('products.destroy');
 Route::patch('/Productos/{product}','ProductController@update')->name('products.update');
 Route::post('/Productos', 'ProductController@store')->name('products.store');
 Route::get('/Productos/{product}','ProductController@show')->name('products.show');
+Route::get('categorias/{category}', 'CategoryController@show')->name('categories.show');
 
 
 

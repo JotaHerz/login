@@ -28,10 +28,17 @@
          </li>
 
 
+
+
+
+
         <li class="nav-item" >
             <a class="nav-link {{ setActive('contact') }}"
             href="/Contactanos">Contáctanos</a>
         </li>
+
+
+
                   @auth
 
                      @if(auth::user()->email_verified_at)
@@ -61,14 +68,27 @@
 
             <li class="nav-item">
                 <a class="nav-link {{ setActive('login') }}"
-                href="{{route('login')}}">Login</a></li>
+                href="{{route('login')}}">Login</a>
+            </li>
+            @endauth
 
-                    @endauth
+            <li class="nav-item">
+                <form method="GET" action="{{ route('products.index')}}" class="form-inline ml-2">
+                    <div class="input-group input-group-sm mt-1">
+                        <input class="form-control form-control-navbar form-control-borderless ml-2" name="search"  type="search" placeholder="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-navbar btn btn-primary" type="submit">Buscar</button>
+                        </div>
+                    </div>
+
+                </form>
+          </li>
 
             </ul>
 
 
     </div>
+
  </nav>
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     @csrf

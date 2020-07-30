@@ -14,6 +14,11 @@
             @endif
             <div class="bg-white p-5 shadow rounded">
                 <h1>{{ $products->title}}</h1>
+                @if($products->category_id)
+                     <a href="{{route('categories.show',$products->category)}}"
+                    class="badge bange-secondary"
+                    >{{ $products->category->name }}</a>
+                @endif
                 <p class="text-secondary">
                     {{ $products->description}}
                 </p>
