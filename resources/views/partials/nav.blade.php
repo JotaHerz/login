@@ -73,11 +73,11 @@
             @endauth
 
             <li class="nav-item">
-                <form method="GET"action="{{ route('products.store')}}"  class="form-inline ml-2">
+                <form method="GET" action="{{ route('products.index')}}" class="form-inline ml-2">
                     <div class="input-group input-group-sm mt-1">
-                        <input class="form-control form-control-navbar form-control-borderless ml-2" title="search" type="search" placeholder="Search">
+                        <input class="form-control form-control-navbar form-control-borderless ml-2" name="search"  type="search" placeholder="Search">
                         <div class="input-group-append">
-                            <button class="btn btn-navbar btn btn-primary" type="submit"><a href="{{ route('products.index') }}">Buscar</a></button>
+                            <button class="btn btn-navbar btn btn-primary" type="submit">Buscar</button>
                         </div>
                     </div>
 

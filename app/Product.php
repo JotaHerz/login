@@ -22,10 +22,8 @@ class Product extends Model
     // Scope
     public function scopeTitle($query,$title)
     {
-        if($title){
-            return $query->where('title', 'LIke', "%title%");
-
-        }
+        if($title)
+            return $query->where('title', 'LIKE', "%$title%");
 
     }
 

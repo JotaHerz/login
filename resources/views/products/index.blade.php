@@ -32,7 +32,7 @@
                     <img class="card-img-top" style="height: 150px; object-fit:cover"
                     src="/storage/{{ $Item->image }}"
                     alt="{{$Item->title}}">
-                @endif
+            @endif
                 <div class="card-body">
                     <h5 class="card-title"> <a href="{{route('products.show', $Item)}}">{{ $Item->title}}</a>
                     </h5>
