@@ -4,9 +4,11 @@ namespace App;
 
 use App\category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
+    use SoftDeletes;
     protected $fillable =['title', 'url','description', 'image', 'cost', 'category_id'];
 
     public function getRouteKeyName()
@@ -16,6 +18,7 @@ class Product extends Model
 
     public function category()
     {
+
        return $this->belongsTo(category::class);
 
     }

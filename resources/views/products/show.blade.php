@@ -34,10 +34,10 @@
 
                         href="{{ route('products.edit', $products) }}">Editar Producto</a>
 
-                        <a class="btn btn-danger"
+                        <a class="btn btn-warning"
 
                         href="#" onclick="document.getElementById('products-destroy').
-                        submit()">Eliminar</a>
+                        submit()">Inhabilitar</a>
                 </div>
                 <form id="products-destroy"
                     class="d-none"

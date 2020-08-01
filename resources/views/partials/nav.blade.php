@@ -27,6 +27,11 @@
              href="{{ route('products.index') }}">Productos</a>
          </li>
 
+         <li class="nav-item">
+            <a class="nav-link {{ setActive('recycling') }}"
+             href="{{ route('recycling') }}">Papelera</a>
+         </li>
+
 
 
 
