@@ -15,10 +15,13 @@ Route::post('/Productos', 'ProductController@store')->name('products.store');
 Route::get('/Productos/{product}','ProductController@show')->name('products.show');
 Route::get('categorias/{category}', 'CategoryController@show')->name('categories.show');
 
+Route::patch('Productos/{product}/restore','ProductController@restore')->name('products.restore');
+Route::delete('Productos/{product}/forceDelete','ProductController@forceDelete')->name('products.forceDelete');
 
 
 
 Route::view('/Contactanos','contact')->name('contact');
+Route::get('/Papelera','ProductController@recycling')->name('recycling');
 Route::get('/admin', 'UsersController@index')->name('admin.users')->middleware('verified', RoleMiddleware::class);
 Route::get('/edit/{usuario}', 'UsersController@store')->name('edit.usuarios')->middleware('verified', RoleMiddleware::class);
 Route::patch('/edit/{usuario}', 'UsersController@update')->name('update.usuarios')->middleware('verified', RoleMiddleware::class);

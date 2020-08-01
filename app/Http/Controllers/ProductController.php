@@ -6,8 +6,8 @@ use App\category;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\saveproductsRequest;
-use Illuminate\Support\Facades\Srorage;
 use Illuminate\Support\Facades\Storage;
+
 
 class ProductController extends Controller
 {
@@ -20,7 +20,9 @@ class ProductController extends Controller
     {
 
         $title=$request->get('search');
-         return view('products.index', ['products'=>Product::title($title)->with('category')->latest()->paginate(6)]);
+         return view('products.index',
+         ['products'=>Product::title($title)->with('category')->latest()->paginate(6),'deletedProducts'=>Product::onlyTrashed()->get()]);
+
     }
 
 
@@ -112,8 +114,31 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        Storage::delete($product->image);
         $product->delete();
         return redirect()->route('products.index');
+    }
+
+    public function restore($productUrl)
+    {
+        $product=Product::withTrashed()->whereUrl($productUrl)->firstOrFail();
+        $product->restore();
+        return redirect()->route('products.index')
+       ->with('status', 'El producto fue Habilitado');
+    }
+
+    public function forceDelete($productUrl)
+    {
+       $product=Product::withTrashed()->whereUrl($productUrl)->firstOrFail();
+       Storage::delete($product->image);
+       $product->forceDelete();
+       return redirect()->route('products.index')
+       ->with('status', 'El producto fue eliminado');
+    }
+
+    public function recycling()
+    {
+        return view('products.recycling',
+         ['deletedProducts'=>Product::onlyTrashed()->get()]);
+
     }
 }

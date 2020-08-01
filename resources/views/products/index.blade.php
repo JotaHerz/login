@@ -84,5 +84,5 @@
 
 
 </div>
-{{ $products->links() }}
+{{ $products->links()}}
 @endsection
