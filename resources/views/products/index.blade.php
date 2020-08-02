@@ -16,10 +16,11 @@
         @else
             <h1 class="display-8 mb-0">Productos</h1>
         @endisset
-             <a class="btn btn-primary"
-                href="{{ route('products.create') }}"
-                >Crear producto</a>
-
+            @can('create',new App\Product)
+            <a class="btn btn-primary"
+            href="{{ route('products.create') }}"
+            >Crear producto</a>
+            @endcan
 
     </div>
 

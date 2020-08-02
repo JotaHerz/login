@@ -25,8 +25,6 @@ class ProductController extends Controller
 
     }
 
-
-
     /**
      * Show the form for creating a new resource.
      *
@@ -34,8 +32,9 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', $product = new Product);
         return view('products.create', [
-            'products'=> new Product,
+            'products'=> $product,
             'categories'=>category::pluck('name', 'id')
         ]);
     }
@@ -46,9 +45,12 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(saveProductsRequest $request)
     {
-       $product = new Product($request->validated());
+
+        $product = new Product($request->validated());
+        $this->authorize('create', $product);
 
         $product->image= $request->file('image')->store('images');
 
@@ -78,6 +80,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $this->authorize('update', $product);
         return view('products.edit', [
             'products'=>$product,
             'categories'=>category::pluck('name', 'id')
@@ -93,6 +96,7 @@ class ProductController extends Controller
      */
     public function update(Product $product, saveProductsRequest $request)
     {
+        $this->authorize('update', $product);
         if($request->hasFile('image')){
             Storage::delete($product->image);
             $product->fill($request->validated());
@@ -114,6 +118,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $this->authorize('delete', $product);
         $product->delete();
         return redirect()->route('products.index');
     }

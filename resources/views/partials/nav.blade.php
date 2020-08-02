@@ -27,10 +27,13 @@
              href="{{ route('products.index') }}">Productos</a>
          </li>
 
+         @can('create', new App\Product)
          <li class="nav-item">
             <a class="nav-link {{ setActive('recycling') }}"
              href="{{ route('recycling') }}">Papelera</a>
          </li>
+         @endcan
+
 
 
 
