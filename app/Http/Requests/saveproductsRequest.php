@@ -31,7 +31,7 @@ class saveproductsRequest extends FormRequest
             'cost'=>'required',
             'category_id'=> ['required', 'exists:categories,id'],
             'image'=>[
-                $this->route('product')? 'nullable':'required'] //jpg, png,bmp, git, svg o webp
+                $this->route('product')? 'nullable':'required','mimes:jpeg,png,svg'] //jpg, png,bmp, git, svg o webp 'mimes:png,jpg,svg'
         ];
     }
 }
