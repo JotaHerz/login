@@ -23,11 +23,16 @@
                     <div>
                         <form class="d-inline" method="POST" action="{{ route('products.restore',$deletedProduct) }}">
                             @csrf @method('PATCH')
+                            @can('restore', $deletedProduct)
                             <button class="btn btn-sm btn-info">Habilitar</button>
+                            @endcan
                         </form>
                         <form class="d-inline" method="POST" action="{{ route('products.forceDelete',$deletedProduct) }}">
                             @csrf @method('DELETE')
+                            @can('forceDelete', $deletedProduct)
                             <button class="btn btn-sm btn-danger">Eliminar</button>
+                            @endcan
+
 
                         </form>
 

@@ -28,30 +28,36 @@
                         Regresar
                     </a>
 
-                        <div class="btn-group btn-group-sm">
-
+                    <div class="btn-group btn-group-sm">
+                        @can('update', $products)
                         <a class="btn btn-success"
 
                         href="{{ route('products.edit', $products) }}">Editar Producto</a>
+                       @endcan
 
-                        <a class="btn btn-warning"
+                        @can('delete',$products)
+                       <a class="btn btn-warning"
 
-                        href="#" onclick="document.getElementById('products-destroy').
-                        submit()">Inhabilitar</a>
-                </div>
-                <form id="products-destroy"
-                    class="d-none"
-                     method="POST" action="{{ route('products.destroy', $products) }}">
-                    @csrf @method('DELETE')
+                       href="#" onclick="document.getElementById('products-destroy').
+                       submit()">Inhabilitar</a>
+                       <form id="products-destroy"
+                      class="d-none"
+                        method="POST" action="{{ route('products.destroy', $products) }}">
+                        @csrf @method('DELETE')
 
-                 </form>
-            </div>
+                       </form>
 
-        </div>
+                      @endcan
+
+                    </div>
+
+               </div>
+
+           </div>
+
+      </div>
 
     </div>
-
-</div>
 
 
 @endsection
