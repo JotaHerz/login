@@ -42,10 +42,10 @@ use Notifiable;
     <?php
     public function Admin() { }
     *
-    *@return bool
+    * @return bool
     */
     public function Admin()
     {
-       return $this->id==1;
+       return $this->role=='admin';
     }
 }

@@ -41,7 +41,7 @@
                 <div class="card-body">
                     <h5 class="card-title"> <a href="{{route('products.show', $Item)}}">{{ $Item->title}}</a>
                     </h5>
-                    <p class="card-text text-truncate">$ {{ $Item->cost }}</p>
+                    <p class="card-text text-truncate">$ {{ number_format($Item->cost) }}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <p class="card-text text-truncate">{{ $Item->description }}</p>
                         @if($Item->category_id)
@@ -59,8 +59,6 @@
 
 
         </div>
-
-
 
         @empty
         <div class="container">

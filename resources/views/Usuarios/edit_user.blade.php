@@ -16,6 +16,9 @@
                   <label for="exampleInputEmail1"><strong>Actualizar Nombre</strong></label>
                   <input name="name" type="text" class="form-control bg-light shadow-sm" id="exampleInputEmail1" aria-describedby="emailHelp"
                     value="{{$usuario->name}}">
+                    @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                 </div>
                 <div class="form-group form-check">
                   <input name="enabled_user" type="checkbox" class="form-check-input" id="exampleCheck1" @if ($usuario->enabled_user)

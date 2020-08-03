@@ -19,11 +19,11 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-
-        $title=$request->get('search');
+         $title=$request->get('search');
          return view('products.index',
-         ['products'=>Product::title($title)->with('category')->latest()->paginate(6),'deletedProducts'=>Product::onlyTrashed()->get()]);
-
+         ['products'=>Product::title($title)
+         ->with('category')
+         ->latest()->paginate(6),'deletedProducts'=>Product::onlyTrashed()->get()]);
     }
 
     /**
@@ -49,21 +49,16 @@ class ProductController extends Controller
 
     public function store(saveProductsRequest $request)
     {
-
         $product = new Product($request->validated());
         $this->authorize('create', $product);
-
         $product->image= $request->file('image')->store('images');
-
         $product->save();
 
         $image = Image::make(Storage::get($product->image))
             ->widen(600)
             ->encode();
-
             Storage::put($product->image, $image);
-
-        return redirect()->route('products.index');
+            return redirect()->route('products.index');
     }
 
     /**
@@ -88,10 +83,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $this->authorize('update', $product);
-        return view('products.edit', [
-            'products'=>$product,
-            'categories'=>category::pluck('name', 'id')
-            ]);
+        return view('products.edit',
+        [ 'products'=>$product, 'categories'=>category::pluck('name', 'id')]);
     }
 
     /**
@@ -115,9 +108,9 @@ class ProductController extends Controller
 
             Storage::put($product->image, $image);
         } else{
-            $product->update(array_filter($request->validated()));
+                $product->update(array_filter($request->validated()));
 
-        }
+               }
 
         return redirect()->route('products.show',$product);
     }
