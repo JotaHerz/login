@@ -33,7 +33,7 @@
                  @if($user->enabled_user)
                  <td >Habilitado</td>
                 @else
-                <td>Inabilitado</td>
+                <td>Inhabilitado</td>
                    @endif
 
                  <th>

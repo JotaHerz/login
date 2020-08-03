@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Mail\MessageReceived;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Http\Request;
 
-class MesscontactController extends Controller
+class MessageContactController extends Controller
 {
      public function store(){
 
@@ -18,7 +17,6 @@ class MesscontactController extends Controller
         ]);
 
         Mail::to('Bio.jherz@gmail.com')->queue(new MessageReceived($msg));
-
         return back()->with('status', 'Tu mensaje fue enviado, pronto te responderemos');
      }
 }
